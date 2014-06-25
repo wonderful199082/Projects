@@ -1,46 +1,41 @@
 #include <stdio.h>
 #include <string.h>
 
-void  Reverse_String(char str[], int n)
+void swap(char *p, char *q)
 {
-  char *p, *r, temp;
-  int i;
-  p = str;
+  char temp;
 
-  for(r = str; *r != '\0'; r++);
-  r--;
-
-  for(i = 0; i <= n/2; i++ )
-  {
-    /**p = *p + *r;*/
-    /**r = *p - *r;*/
-    /**p = *p - *r;*/
-    temp = *r;
-    *r = *p;
-    *p = temp;
-    p++;
-    r--;
-  }
+  temp = *p;
+  *p   = *q;
+  *q   = temp;
 }
 
-int main()
+void reverse_string(char str[], int n)
 {
-  char str[10];
+  char *p = str, *q, temp;
+  int i;
+
+  for(q = str; *q != '\0'; q++);
+  q--;
+
+  for(i = 0; i < n/2; i++ )
+  {
+    swap(p, q);
+    p++;
+    q--;
+  }
+
+}
+
+int main(int argc, char* argv[])
+{
   char *p;
-  int n;
 
-  printf("Please input your string(within 10 letters).\n");
-  scanf("%s", str);
+  reverse_string(argv[1], strlen(argv[1]));
 
-  n = strlen(str);
+  printf("\nThe reverse string is:\n");
 
-  Reverse_String (str, n);
-
-  /*string[sizeof(string)+1] = '\0';*/
-
-  printf("\nthe string after reversing is:\n");
-
-  for(p = str; *p != '\0'; p++)
+  for(p = argv[1]; *p != '\0'; p++)
   {
     printf("%c", *p);
   }
